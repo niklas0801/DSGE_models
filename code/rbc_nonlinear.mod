@@ -1,6 +1,8 @@
+@#define LOGUTILITY = 1
+
 % Defining endogenous variables
 var
-    y c k l a r w iv mc uc ul fl fk
+    y c k l a r w iv mc
 ;
 
 % Defining exogenous variables
@@ -15,9 +17,11 @@ parameters
     DELTA
     GAMMA
     PSI
-    RHOA
+    @#if LOGUTILITY == 0
     ETAC
     ETAL
+    @#endif
+    RHOA
 ;
 
 % Parameter calibration
@@ -26,22 +30,30 @@ BETA = 0.99;
 DELTA = 0.025;
 GAMMA = 1;
 PSI = 1.6;
-RHOA = 0.9;
+@#if LOGUTILITY == 0
 ETAC = 2;
 ETAL = 1;
+@#endif
+RHOA = 0.9;
 
 % Model equations
 model;
-% marginal utility of consumption
-uc = GAMMA*c^(-ETAC);
-% marginal utility of labor
-ul = -PSI*(1-l)^(-ETAL);
-% marginal products of production
-fk = ALPHA*y/k(-1);
-fl = (1-ALPHA)*y/l;
+% marginal utility of consumption and labor
+@#if LOGUTILITY == 1
+#uc = GAMMA*c^(-1);
+#ucp = GAMMA*c(+1)^(-1);
+#ul = -PSI*(1-l)^(-1);
+@#else
+#uc = GAMMA*c^(-ETAC);
+#ucp = GAMMA*c(+1)^(-ETAC);
+#ul = -PSI*(1-l)^(-ETAL);
+@#endif
 
+% marginal products of production
+#fk = ALPHA*y/k(-1);
+#fl = (1-ALPHA)*y/l;
 % intertemporal optimality (Euler)
-uc = BETA*uc(+1)*(1-DELTA+r(+1));
+uc = BETA*ucp*(1-DELTA+r(+1));
 % labor supply
 w = -ul/uc;
 % capital accumulation

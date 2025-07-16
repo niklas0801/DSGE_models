@@ -22,19 +22,15 @@ function residual = dynamic_resid(T, y, x, params, steady_state, it_, T_flag)
 if T_flag
     T = rbc_nonlinear.dynamic_resid_tt(T, y, x, params, steady_state, it_);
 end
-residual = zeros(13, 1);
-    residual(1) = (y(12)) - (params(4)*y(4)^(-params(7)));
-    residual(2) = (y(13)) - ((-params(5))*(1-y(6))^(-params(8)));
-    residual(3) = (y(15)) - (params(1)*y(3)/y(1));
-    residual(4) = (y(14)) - (y(3)*(1-params(1))/y(6));
-    residual(5) = (y(12)) - (params(2)*y(17)*(1-params(3)+y(16)));
-    residual(6) = (y(9)) - ((-y(13))/y(12));
-    residual(7) = (y(5)) - (y(1)*(1-params(3))+y(10));
-    residual(8) = (y(3)) - (y(4)+y(10));
-    residual(9) = (y(3)) - (T(2)*T(3));
-    residual(10) = (y(11)) - (1);
-    residual(11) = (y(9)) - (y(14));
-    residual(12) = (y(8)) - (y(15));
-    residual(13) = (log(y(7))) - (params(6)*log(y(2))+x(it_, 1));
+residual = zeros(9, 1);
+    residual(1) = (T(1)) - ((1-params(3)+y(13))*T(5));
+    residual(2) = (y(9)) - (T(6)/T(1));
+    residual(3) = (y(5)) - (y(1)*(1-params(3))+y(10));
+    residual(4) = (y(3)) - (y(4)+y(10));
+    residual(5) = (y(3)) - (T(3)*T(4));
+    residual(6) = (y(11)) - (1);
+    residual(7) = (y(9)) - (y(3)*(1-params(1))/y(6));
+    residual(8) = (y(8)) - (params(1)*y(3)/y(1));
+    residual(9) = (log(y(7))) - (params(6)*log(y(2))+x(it_, 1));
 
 end

@@ -4,7 +4,8 @@ if T_order >= 2
 end
 [T_order, T] = rbc_nonlinear.sparse.dynamic_g1_tt(y, x, params, steady_state, T_order, T);
 T_order = 2;
-if size(T, 1) < 6
-    T = [T; NaN(6 - size(T, 1), 1)];
+if size(T, 1) < 13
+    T = [T; NaN(13 - size(T, 1), 1)];
 end
+T(13) = params(4)*getPowerDeriv(y(11),(-1),2);
 end

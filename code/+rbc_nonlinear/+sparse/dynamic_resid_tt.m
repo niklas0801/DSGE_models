@@ -3,10 +3,13 @@ if T_order >= 0
     return
 end
 T_order = 0;
-if size(T, 1) < 3
-    T = [T; NaN(3 - size(T, 1), 1)];
+if size(T, 1) < 6
+    T = [T; NaN(6 - size(T, 1), 1)];
 end
-T(1) = y(3)^params(1);
-T(2) = y(18)*T(1);
-T(3) = y(17)^(1-params(1));
+T(1) = params(4)*y(11)^(-1);
+T(2) = y(3)^params(1);
+T(3) = y(14)*T(2);
+T(4) = y(13)^(1-params(1));
+T(5) = params(4)*y(20)^(-1)*params(2);
+T(6) = (-((-params(5))*(1-y(13))^(-1)));
 end
