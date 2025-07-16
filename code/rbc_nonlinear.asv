@@ -1,0 +1,36 @@
+% Defining endogenous variables
+var
+    y c k l a r w iv mc
+;
+
+% Defining exogenous variables
+varexo
+    epsa
+;
+
+% Defining parameters
+parameters
+    ALPHA
+    BETA
+    DELTA
+    GAMMA
+    PSI
+    RHOA
+    ETAC
+    ETAL
+
+;
+
+% Parameter calibration
+ALPHA = 0.35;
+BETA = 0.99;
+DELTA = 0.025;
+GAMMA = 1;
+PSI = 1.6;
+RHOA = 0.9;
+ETAC = 2;
+ETAL = 1;
+
+model;
+uc = BETA*uc(
+end;
