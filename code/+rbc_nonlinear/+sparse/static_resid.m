@@ -13,5 +13,5 @@ residual = NaN(9, 1);
     residual(6) = (y(9)) - (1);
     residual(7) = (y(7)) - (y(1)*(1-params(1))/y(4));
     residual(8) = (y(6)) - (params(1)*y(1)/y(3));
-    residual(9) = (log(y(5))) - (log(y(5))*params(6)+x(1));
+    residual(9) = (log(y(5))) - (log(y(5))*params(8)+x(1));
 end

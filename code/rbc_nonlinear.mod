@@ -1,4 +1,4 @@
-@#define LOGUTILITY = 1
+@#define LOGUTILITY = 0
 
 % Defining endogenous variables
 var
@@ -71,3 +71,51 @@ r = mc*fk;
 % total factor productivity
 log(a) = RHOA*log(a(-1)) + epsa;
 end;
+
+%--------------------------%
+% Steady State Computation %
+%--------------------------%
+@#define AnalyticalSteadyState = 1
+
+@#if AnalyticalSteadyState == 1
+
+steady_state_model;
+
+a = 1;
+mc = 1;
+r = 1/BETA + DELTA - 1;
+K_L = (mc*ALPHA*a/r)^(1/(1-ALPHA));
+w = mc*(1-ALPHA)*a*K_L^ALPHA;
+IV_L = DELTA*K_L;
+Y_L = a*(K_L)^ALPHA;
+C_L = Y_L - IV_L;
+@#if LOGUTILITY == 1
+l = GAMMA/PSI*C_L^(-1)*w/(1+GAMMA/PSI*C_L^(-1)*w);
+@#else
+L0 = 1/3;
+l = rbc_steady_state_helper(L0, w, C_L, ETAC, ETAL, PSI, GAMMA);
+@#endif
+c = C_L*l;
+y = Y_L*l;
+iv = IV_L*l;
+k = K_L*l;
+
+end;
+
+@#else
+
+initval;
+a = 1;
+mc = 1;
+r = 0.03;
+l = 1/3;
+y = 1.2;
+c = 0.9;
+iv = 0.35;
+k = 12;
+w = 2.25;
+end;
+
+@#endif
+
+steady;

@@ -7,5 +7,5 @@ T_order = 1;
 if size(T, 1) < 6
     T = [T; NaN(6 - size(T, 1), 1)];
 end
-T(6) = params(4)*getPowerDeriv(y(2),(-1),1);
+T(6) = params(4)*getPowerDeriv(y(2),(-params(6)),1);
 end

@@ -19,4 +19,16 @@ Finding the optimal block decomposition of the dynamic model...
                                  and 6 feedback variable(s).
 Preprocessing completed.
 Preprocessing time: 0h00m00s.
+
+STEADY-STATE RESULTS:
+
+y  		 1.25718
+c  		 0.943787
+k  		 12.5356
+l  		 0.364425
+a  		 1
+r  		 0.035101
+w  		 2.24234
+iv 		 0.31339
+mc 		 1
 Total computing time : 0h00m00s

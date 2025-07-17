@@ -31,6 +31,6 @@ residual = zeros(9, 1);
     residual(6) = (y(11)) - (1);
     residual(7) = (y(9)) - (y(3)*(1-params(1))/y(6));
     residual(8) = (y(8)) - (params(1)*y(3)/y(1));
-    residual(9) = (log(y(7))) - (params(6)*log(y(2))+x(it_, 1));
+    residual(9) = (log(y(7))) - (params(8)*log(y(2))+x(it_, 1));
 
 end

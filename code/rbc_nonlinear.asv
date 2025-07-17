@@ -2,7 +2,7 @@
 
 % Defining endogenous variables
 var
-    y c k l a r w iv mc uc ul fl fk
+    y c k l a r w iv mc
 ;
 
 % Defining exogenous variables
@@ -40,18 +40,20 @@ RHOA = 0.9;
 model;
 % marginal utility of consumption and labor
 @#if LOGUTILITY == 1
-uc = GAMMA*c^(-1);
-ul = -PSI*(1-l)^(-1);
+#uc = GAMMA*c^(-1);
+#ucp = GAMMA*c(+1)^(-1);
+#ul = -PSI*(1-l)^(-1);
 @#else
-uc = GAMMA*c^(-ETAC);
-ul = -PSI*(1-l)^(-ETAL);
+#uc = GAMMA*c^(-ETAC);
+#ucp = GAMMA*c(+1)^(-ETAC);
+#ul = -PSI*(1-l)^(-ETAL);
 @#endif
 
 % marginal products of production
-fk = ALPHA*y/k(-1);
-fl = (1-ALPHA)*y/l;
+#fk = ALPHA*y/k(-1);
+#fl = (1-ALPHA)*y/l;
 % intertemporal optimality (Euler)
-uc = BETA*uc(+1)*(1-DELTA+r(+1));
+uc = BETA*ucp*(1-DELTA+r(+1));
 % labor supply
 w = -ul/uc;
 % capital accumulation
@@ -69,3 +71,21 @@ r = mc*fk;
 % total factor productivity
 log(a) = RHOA*log(a(-1)) + epsa;
 end;
+
+%--------------------------%
+% Steady State Computation %
+%--------------------------%
+@#define AnalyticalS
+initval;
+a = 1;
+mc = 1;
+r = 0.03;
+l = 1/3;
+y = 1.2;
+c = 0.9;
+iv = 0.35;
+k = 12;
+w = 2.25;
+end;
+
+steady;

@@ -17,6 +17,6 @@ assert(length(T) >= 6);
 
 T = rbc_nonlinear.static_resid_tt(T, y, x, params);
 
-T(6) = params(4)*getPowerDeriv(y(2),(-1),1);
+T(6) = params(4)*getPowerDeriv(y(2),(-params(6)),1);
 
 end
