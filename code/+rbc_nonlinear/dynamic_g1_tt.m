@@ -18,15 +18,10 @@ function T = dynamic_g1_tt(T, y, x, params, steady_state, it_)
 %   T           [#temp variables by 1]       double  vector of temporary terms
 %
 
-assert(length(T) >= 12);
+assert(length(T) >= 7);
 
 T = rbc_nonlinear.dynamic_resid_tt(T, y, x, params, steady_state, it_);
 
 T(7) = params(4)*getPowerDeriv(y(4),(-params(6)),1);
-T(8) = params(2)*params(4)*getPowerDeriv(y(12),(-params(6)),1);
-T(9) = getPowerDeriv(y(1),params(1),1);
-T(10) = y(7)*T(9);
-T(11) = (-((-params(5))*(-(getPowerDeriv(1-y(6),(-params(7)),1)))));
-T(12) = getPowerDeriv(y(6),1-params(1),1);
 
 end

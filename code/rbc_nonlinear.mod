@@ -119,3 +119,21 @@ end;
 @#endif
 
 steady;
+
+shocks;
+var epsa; periods 1; values -0.1;
+end;
+
+% make sure everything is set up correctly
+%perfect_foresight_setup(periods=4);
+%oo_.exo_simul
+%oo_.endo_simul
+
+perfect_foresight_setup(periods=300);
+perfect_foresight_solver;
+
+rplot c iv y;
+rplot l w;
+rplot r;
+rplot k;
+rplot a;

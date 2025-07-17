@@ -108,8 +108,6 @@ options_.bytecode = false;
 options_.use_dll = false;
 options_.ramsey_policy = false;
 options_.discretionary_policy = false;
-M_.nonzero_hessian_eqs = [1 2 5 7 8 9];
-M_.hessian_eq_zero = isempty(M_.nonzero_hessian_eqs);
 M_.eq_nbr = 9;
 M_.ramsey_orig_eq_nbr = 0;
 M_.ramsey_orig_endo_nbr = 0;
@@ -142,7 +140,7 @@ M_.nboth   = 0;
 M_.nsfwrd   = 2;
 M_.nspred   = 2;
 M_.ndynamic   = 4;
-M_.dynamic_tmp_nbr = [6; 6; 1; 0; ];
+M_.dynamic_tmp_nbr = [6; 1; 0; 0; ];
 M_.equations_tags = {
   1 , 'name' , 'uc' ;
   2 , 'name' , 'w' ;
@@ -248,28 +246,10 @@ M_.maximum_exo_lead = 0;
 oo_.exo_steady_state = zeros(1, 1);
 M_.params = NaN(8, 1);
 M_.endo_trends = struct('deflator', cell(9, 1), 'log_deflator', cell(9, 1), 'growth_factor', cell(9, 1), 'log_growth_factor', cell(9, 1));
-M_.NNZDerivatives = [26; 24; -1; ];
+M_.NNZDerivatives = [26; -1; -1; ];
 M_.dynamic_g1_sparse_rowval = int32([3 5 8 9 4 5 7 8 1 2 4 3 2 5 7 5 9 8 2 7 3 4 6 1 1 9 ]);
 M_.dynamic_g1_sparse_colval = int32([3 3 3 5 10 10 10 10 11 11 11 12 13 13 13 14 14 15 16 16 17 17 18 20 24 28 ]);
 M_.dynamic_g1_sparse_colptr = int32([1 1 1 4 4 5 5 5 5 5 9 12 13 16 18 19 21 23 24 24 25 25 25 25 26 26 26 26 27 ]);
-M_.dynamic_g2_sparse_indices = int32([1 11 11 ;
-1 20 20 ;
-1 20 24 ;
-2 11 11 ;
-2 11 13 ;
-2 13 13 ;
-5 3 3 ;
-5 3 13 ;
-5 3 14 ;
-5 13 13 ;
-5 13 14 ;
-7 10 13 ;
-7 13 13 ;
-8 10 3 ;
-8 3 3 ;
-9 5 5 ;
-9 14 14 ;
-]);
 M_.lhs = {
 'GAMMA*c^(-ETAC)'; 
 'w'; 
@@ -353,6 +333,25 @@ ETAL = M_.params(7);
 M_.params(8) = 0.9;
 RHOA = M_.params(8);
 steady;
+%
+% SHOCKS instructions
+%
+M_.det_shocks = [ M_.det_shocks;
+struct('exo_det',false,'exo_id',1,'type','level','periods',1:1,'value',(-0.1)) ];
+M_.exo_det_length = 0;
+options_.periods = 300;
+oo_ = perfect_foresight_setup(M_, options_, oo_);
+[oo_, Simulated_time_series] = perfect_foresight_solver(M_, options_, oo_);
+var_list_ = {'c';'iv';'y'};
+rplot(var_list_);
+var_list_ = {'l';'w'};
+rplot(var_list_);
+var_list_ = {'r'};
+rplot(var_list_);
+var_list_ = {'k'};
+rplot(var_list_);
+var_list_ = {'a'};
+rplot(var_list_);
 
 
 oo_.time = toc(tic0);

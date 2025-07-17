@@ -10,7 +10,7 @@ Finding the optimal block decomposition of the static model...
   2 recursive block(s) and 1 simultaneous block(s).
   the largest simultaneous block has 7 equation(s)
                                  and 7 feedback variable(s).
-Computing dynamic model derivatives (order 2).
+Computing dynamic model derivatives (order 1).
 Normalizing the dynamic model...
 Finding the optimal block decomposition of the dynamic model...
 3 block(s) found:
@@ -31,4 +31,19 @@ r  		 0.035101
 w  		 2.24234
 iv 		 0.31339
 mc 		 1
-Total computing time : 0h00m00s
+
+--------------------------------------------------------
+MODEL SIMULATION:
+
+Iter: 1,	 err. = 0.1,	 time = 1.02835
+Iter: 2,	 err. = 0.0109835,	 time = 0.013117
+Iter: 3,	 err. = 1.45785e-05,	 time = 0.010533
+Iter: 4,	 err. = 2.5448e-10,	 time = 0.009721
+
+Total time of simulation: 1.08226.
+--------------------------------------------------------
+
+
+Perfect foresight solution found.
+
+Total computing time : 0h00m14s
